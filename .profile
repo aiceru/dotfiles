@@ -29,14 +29,19 @@ C_BG_LIGHTGRAY="\[\033[47m\]"
 if [ -f ~/.bash_scripts/.git-completion.bash ]; then
 	. ~/.bash_scripts/.git-completion.bash
 fi
+# for Git-prompt
+if [ -f ~/.bash_scripts/.git-prompt.sh ]; then
+  source ~/.bash_scripts/.git-prompt.sh
+fi
 
 export TERM="xterm-color"
 export CLICOLOR=1
-export LSCOLORS=ExFxCxDxBxegedabagacad
 export GREP_OPTIONS='--color=auto'
+#export LSCOLORS=ExFxCxDxBxegedabagacad
+dircolors -b $HOME/.dircolors > /dev/null
 
 # User specific aliases and functions
-PS1="$C_WHITE\D{%H:%M:%S} $C_DEFAULT[$C_LIGHTPURPLE\u$C_DEFAULT@$C_LIGHTYELLOW\h $C_LIGHTGREEN\w$C_DEFAULT]\$ "
+PS1="$C_WHITE\D{%H:%M:%S} $C_DEFAULT[$C_LIGHTPURPLE\u$C_DEFAULT@$C_LIGHTYELLOW\h $C_LIGHTGREEN\w$C_PURPLE"'$(__git_ps1 " (%s)")'"$C_DEFAULT]\$ "
 ulimit -c unlimited
 ulimit -n 4096
 
@@ -85,9 +90,9 @@ alias psgrep='ps -ef | grep -v "root " | grep -v "sshd:" | grep -v "\-bash" | gr
 #alias psgrep='ps -ef | grep $USER'
 
 alias sp='source ~/.profile'
-alias ls='ls -GFh'
-alias ll='ls -GFhl'
-alias la='ls -GFhal'
+alias ls='ls -GFh --color'
+alias ll='ls -GFhl --color'
+alias la='ls -GFhal --color'
 alias fc='find . -name "*[ch]" -print | xargs grep $1 -H -n'
 alias fj='find . -name "*.java" -print | xargs grep $1 -H -n'
 
