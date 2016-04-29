@@ -25,6 +25,7 @@ C_BG_PURPLE="\[\033[45m\]"
 C_BG_CYAN="\[\033[46m\]"
 C_BG_LIGHTGRAY="\[\033[47m\]"
 
+################## OS X only ########################
 # for Git-completion
 if [ -f ~/.bash_scripts/.git-completion.bash ]; then
 	. ~/.bash_scripts/.git-completion.bash
@@ -34,19 +35,44 @@ if [ -f ~/.bash_scripts/.git-prompt.sh ]; then
   source ~/.bash_scripts/.git-prompt.sh
 fi
 
+export LSCOLORS=ExFxCxDxBxegedabagacad
+
+# for Go
+export GOPATH=/Users/iceru/PrivateDev/GoBook
+# for GNU Libraries (brew coreutils)
+export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+# for GNU gcc
+export PATH="/usr/local/gcc-5.3.0/bin:$PATH"
+# for libtool(ize) 
+export PATH="/usr/local/Cellar/libtool/2.4.6/bin:$PATH"
+# for bison
+export PATH="/usr/local/Cellar/bison/3.0.4/bin:$PATH"
+
+# for coreutils
+alias readlink='greadlink'
+
+alias ls='ls -GFh'
+alias ll='ls -GFhl'
+alias la='ls -GFhal'
+
+################## Mint only ########################
+dircolors -b $HOME/.dircolors > /dev/null
+
+alias ls='ls -GFh --color'
+alias ll='ls -GFhl --color'
+alias la='ls -GFhal --color'
+
+################## Common ###########################
 export TERM="xterm-color"
 export CLICOLOR=1
 export GREP_OPTIONS='--color=auto'
-#export LSCOLORS=ExFxCxDxBxegedabagacad
-dircolors -b $HOME/.dircolors > /dev/null
 
 # User specific aliases and functions
 PS1="$C_WHITE\D{%H:%M:%S} $C_DEFAULT[$C_LIGHTPURPLE\u$C_DEFAULT@$C_LIGHTYELLOW\h $C_LIGHTGREEN\w$C_PURPLE"'$(__git_ps1 " (%s)")'"$C_DEFAULT]\$ "
 ulimit -c unlimited
 ulimit -n 4096
 
-# for Go
-export GOPATH=/Users/iceru/PrivateDev/GoBook
 
 # for Maven
 export MAVEN_HOME=/usr/local/mvn/apache-maven-3.3.9
@@ -68,45 +94,19 @@ export ARCUS_DEV_REPO=$WORK_HOME/arcus/repo/aiceru
 # for Git
 export PATH=/usr/local/git/bin:$PATH
 
-# for GNU Libraries (brew coreutils)
-#export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
-export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
-# for GNU gcc
-export PATH="/usr/local/gcc-5.3.0/bin:$PATH"
-# for libtool(ize) 
-export PATH="/usr/local/Cellar/libtool/2.4.6/bin:$PATH"
-# for bison
-export PATH="/usr/local/Cellar/bison/3.0.4/bin:$PATH"
-
 # SERVER address
 export M002_ADDR='125.209.200.190'
 # for Arcus (memcached)
 export ARCUS_CACHE_PUBLIC_IP='127.0.0.1'
 
-# for Arcus-Hubble
-#export COLLECTD_HOME=$HOME/test/arcus-collectd
-
 alias psgrep='ps -ef | grep -v "root " | grep -v "sshd:" | grep -v "\-bash" | grep -v "ps" | grep -v "grep" | grep $USER'
-#alias psgrep='ps -ef | grep $USER'
 
 alias sp='source ~/.profile'
-alias ls='ls -GFh --color'
-alias ll='ls -GFhl --color'
-alias la='ls -GFhal --color'
 alias fc='find . -name "*[ch]" -print | xargs grep $1 -H -n'
 alias fj='find . -name "*.java" -print | xargs grep $1 -H -n'
 
 alias treev='tree -hvL $1'
 alias treet='tree -htL $1'
-
-# for coreutils
-alias readlink='greadlink'
-
-# VImproved
-alias vimt='vi -p$# $*'
-
-# MAVEN alias
-alias mvnpackage='mvn package -Dmaven.test.skip=true'
 
 # SSH alias
 alias m002ssh='ssh wooseok.son@$M002_ADDR'
