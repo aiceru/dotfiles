@@ -51,7 +51,7 @@ set tags+=~/Work/arcus/repo/naver/arcus/zookeeper/src/c/tags
 syntax enable
 set t_Co=256
 set background=dark
-colorscheme primary
+colorscheme molokai
 set nu
 set ruler
 set expandtab
@@ -170,3 +170,7 @@ nmap <leader>bq :bp <BAR> bd #<CR>
 
 " 모든 버퍼와 각 버퍼 상태 출력
 nmap <leader>bl :ls<CR>
+
+"------------ molokai color -------------------
+let g:molokai_original = 1
+let g:rehash256 = 1
