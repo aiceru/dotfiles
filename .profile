@@ -25,51 +25,62 @@ C_BG_PURPLE="\[\033[45m\]"
 C_BG_CYAN="\[\033[46m\]"
 C_BG_LIGHTGRAY="\[\033[47m\]"
 
-################## OS X only ########################
-# for Git-completion
-if [ -f ~/.bash_scripts/.git-completion.bash ]; then
-	. ~/.bash_scripts/.git-completion.bash
-fi
-# for Git-prompt
-if [ -f ~/.bash_scripts/.git-prompt.sh ]; then
-  source ~/.bash_scripts/.git-prompt.sh
-fi
+case $OSTYPE in darwin*)
+  echo darwin!
+  ################## OS X only ########################
+  # for Git-completion
+  if [ -f ~/.bash_scripts/.git-completion.bash ]; then
+    . ~/.bash_scripts/.git-completion.bash
+  fi
+  # for Git-prompt
+  if [ -f ~/.bash_scripts/.git-prompt.sh ]; then
+    source ~/.bash_scripts/.git-prompt.sh
+  fi
 
-export LSCOLORS=ExFxCxDxBxegedabagacad
+  export LSCOLORS=ExFxCxDxBxegedabagacad
 
-# for Go
-export GOPATH=/Users/iceru/PrivateDev/GoBook
-# for GNU Libraries (brew coreutils)
-export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
-export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
-# for GNU gcc
-export PATH="/usr/local/gcc-5.3.0/bin:$PATH"
-# for libtool(ize) 
-export PATH="/usr/local/Cellar/libtool/2.4.6/bin:$PATH"
-# for bison
-export PATH="/usr/local/Cellar/bison/3.0.4/bin:$PATH"
+  # for Go
+  export GOPATH=/Users/iceru/PrivateDev/GoBook
+  export PATH=$PATH:$GOPATH/bin
 
-# for coreutils
-alias readlink='greadlink'
+  # for GNU Libraries (brew coreutils)
+  export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+  export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+  # for GNU gcc
+  export PATH="/usr/local/gcc-5.3.0/bin:$PATH"
+  # for libtool(ize) 
+  export PATH="/usr/local/Cellar/libtool/2.4.6/bin:$PATH"
+  # for bison
+  export PATH="/usr/local/Cellar/bison/3.0.4/bin:$PATH"
 
-alias ls='ls -GFh'
-alias ll='ls -GFhl'
-alias la='ls -GFhal'
+  # for coreutils
+  alias readlink='greadlink'
 
-################## Mint only ########################
-dircolors -b $HOME/.dircolors > /dev/null
+  alias ls='ls -GFh'
+  alias ll='ls -GFhl'
+  alias la='ls -GFhal'
 
-alias ls='ls -GFh --color'
-alias ll='ls -GFhl --color'
-alias la='ls -GFhal --color'
+esac
+
+case $OSTYPE in linux-gnu*)
+  echo linux!
+  ################## Mint only ########################
+  dircolors -b $HOME/.dircolors > /dev/null
+
+  alias ls='ls -GFh --color'
+  alias ll='ls -GFhl --color'
+  alias la='ls -GFhal --color'
+
+esac
 
 ################## Common ###########################
+echo common!
 export TERM="xterm-color"
 export CLICOLOR=1
 export GREP_OPTIONS='--color=auto'
 
 # User specific aliases and functions
-PS1="$C_WHITE\D{%H:%M:%S} $C_DEFAULT[$C_LIGHTPURPLE\u$C_DEFAULT@$C_LIGHTYELLOW\h $C_LIGHTGREEN\w$C_PURPLE"'$(__git_ps1 " (%s)")'"$C_DEFAULT]\$ "
+PS1="$C_WHITE\D{%H:%M:%S} $C_DEFAULT[$C_LIGHTPURPLE\u$C_DEFAULT@$C_LIGHTYELLOW\h $C_LIGHTGREEN\W$C_PURPLE"'$(__git_ps1 " (%s)")'"$C_DEFAULT]\$ "
 ulimit -c unlimited
 ulimit -n 4096
 
@@ -111,6 +122,7 @@ alias treet='tree -htL $1'
 # SSH alias
 alias m002ssh='ssh wooseok.son@$M002_ADDR'
 
+alias golang_start='cd $GOPATH'
 alias go_c_client='cd ~/Work/arcus/repo/aiceru/arcus-c-client'
 alias go_acp='cd ~/Work/arcus/repo/jam2in/arcus-misc/acp-java'
 alias go_arcus_scripts='cd $ARCUS_SCRIPTS'
