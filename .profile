@@ -65,6 +65,7 @@ esac
 case $OSTYPE in linux-gnu*)
   echo linux!
   ################## Mint only ########################
+  . /etc/infinality-settings.sh
   dircolors -b $HOME/.dircolors > /dev/null
 
   alias ls='ls -GFh --color'
@@ -104,6 +105,9 @@ export ARCUS_DEV_REPO=$WORK_HOME/arcus/repo/aiceru
 
 # for Git
 export PATH=/usr/local/git/bin:$PATH
+
+# for GoLang
+export PATH=$PATH:/usr/local/go/bin
 
 # SERVER address
 export M002_ADDR='125.209.200.190'
