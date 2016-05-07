@@ -41,6 +41,12 @@ filetype plugin indent on    " required
 " Put your non-Plugin stuff after this line
 "-----------------------------------------------
 
+"----------------- CURSOR ----------------------
+if $TERM_PROGRAM =~ "iTerm"
+  let &t_SI = "\<Esc>]50;CursorShape=1\x7" " Vertical bar in insert mode
+  let &t_EI = "\<Esc>]50;CursorShape=0\x7" " Block in normal mode
+endif
+
 "----------------- CTAGS -----------------------
 set tags=./tags
 "set tags+=~/Work/arcus/repo/aiceru/arcus-c-client/tags
@@ -75,14 +81,14 @@ silent cs add ~/Work/arcus/repo/naver/arcus/zookeeper/src/c/cscope.out
 set csverb
 
 func! Sts()
-	let st = expand("<cword>")
-	exe "sts ".st
+  let st = expand("<cword>")
+  exe "sts ".st
 endfunc
 nmap ,st :call Sts()<CR>
 
 func! Tj()
-	let st = expand("<cword>")
-	exe "tj ".st
+  let st = expand("<cword>")
+  exe "tj ".st
 endfunc
 nmap ,tj :call Tj()<CR>
 nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
@@ -121,13 +127,14 @@ let g:go_fmt_fail_silently = 1
 let g:go_fmg_autosave = 0
 let g:go_play_open_browser = 0
 let g:go_bin_path=expand("~/.gotools")
+set completeopt=longest,menuone
 
 "--------------- ctrlp -------------------------
 " 기본 무시 설정
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/](\.(git|hg|svn)|\_site)$',
-  \ 'file': '\v\.(exe|so|dll|class|png|jpg|jpeg)$',
-  \}
+      \ 'dir':  '\v[\/](\.(git|hg|svn)|\_site)$',
+      \ 'file': '\v\.(exe|so|dll|class|png|jpg|jpeg)$',
+      \}
 
 " 가장 가까운 .git 디렉토리를 cwd(현재 작업 디렉토리)로 사용
 " 버전 관리를 사용하는 프로젝트를 할 때 꽤 적절하다.

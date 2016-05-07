@@ -1,3 +1,5 @@
+################## Common ###########################
+
 # define colors
 C_DEFAULT="\[\033[m\]"
 C_WHITE="\[\033[1m\]"
@@ -25,62 +27,13 @@ C_BG_PURPLE="\[\033[45m\]"
 C_BG_CYAN="\[\033[46m\]"
 C_BG_LIGHTGRAY="\[\033[47m\]"
 
-case $OSTYPE in darwin*)
-  echo darwin!
-  ################## OS X only ########################
-  # for Git-completion
-  if [ -f ~/.bash_scripts/.git-completion.bash ]; then
-    . ~/.bash_scripts/.git-completion.bash
-  fi
-  # for Git-prompt
-  if [ -f ~/.bash_scripts/.git-prompt.sh ]; then
-    source ~/.bash_scripts/.git-prompt.sh
-  fi
-
-  export LSCOLORS=ExFxCxDxBxegedabagacad
-
-  # for GNU Libraries (brew coreutils)
-  export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
-  export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
-  # for GNU gcc
-  export PATH="/usr/local/gcc-5.3.0/bin:$PATH"
-  # for libtool(ize) 
-  export PATH="/usr/local/Cellar/libtool/2.4.6/bin:$PATH"
-  # for bison
-  export PATH="/usr/local/Cellar/bison/3.0.4/bin:$PATH"
-
-  # for coreutils
-  alias readlink='greadlink'
-
-  alias ls='ls -GFh'
-  alias ll='ls -GFhl'
-  alias la='ls -GFhal'
-
-esac
-
-case $OSTYPE in linux-gnu*)
-  echo linux!
-  ################## Mint only ########################
-  . /etc/infinality-settings.sh
-  dircolors -b $HOME/.dircolors > /dev/null
-
-  alias ls='ls -GFh --color'
-  alias ll='ls -GFhl --color'
-  alias la='ls -GFhal --color'
-
-esac
-
-################## Common ###########################
-echo common!
 export TERM="xterm-color"
-export CLICOLOR=1
-export GREP_OPTIONS='--color=auto'
 
 # User specific aliases and functions
-PS1="$C_WHITE\D{%H:%M:%S} $C_DEFAULT[$C_LIGHTPURPLE\u$C_DEFAULT@$C_LIGHTYELLOW\h $C_LIGHTGREEN\W$C_PURPLE"'$(__git_ps1 " (%s)")'"$C_DEFAULT]\$ "
+PS1="$C_WHITE\D{%H:%M:%S} $C_DEFAULT[$C_LIGHTPURPLE\u$C_DEFAULT@$C_LIGHTYELLOW\H $C_LIGHTGREEN\W$C_PURPLE"'$(__git_ps1 " (%s)")'"$C_DEFAULT]\$ "
+eval $(dircolors -b $HOME/.dircolors)
 ulimit -c unlimited
 ulimit -n 4096
-
 
 # for Maven
 export MAVEN_HOME=/usr/local/mvn/apache-maven-3.3.9
@@ -112,6 +65,11 @@ export M002_ADDR='125.209.200.190'
 # for Arcus (memcached)
 export ARCUS_CACHE_PUBLIC_IP='127.0.0.1'
 
+# set '--color' options because we use GNU ls, not FreeBSD's ls!!
+alias ls='ls -GFh --color'
+alias ll='ls -GFhl --color'
+alias la='ls -GFhal --color'
+
 alias psgrep='ps -ef | grep -v "root " | grep -v "sshd:" | grep -v "\-bash" | grep -v "ps" | grep -v "grep" | grep $USER'
 
 alias sp='source ~/.profile'
@@ -129,3 +87,42 @@ alias go_c_client='cd ~/Work/arcus/repo/aiceru/arcus-c-client'
 alias go_acp='cd ~/Work/arcus/repo/jam2in/arcus-misc/acp-java'
 alias go_arcus_scripts='cd $ARCUS_SCRIPTS'
 alias sp='source ~/.profile'
+
+
+case $OSTYPE in linux-gnu*)
+  ################## Mint only ########################
+  . /etc/infinality-settings.sh
+
+esac
+
+
+case $OSTYPE in darwin*)
+  ################## OS X only ########################
+
+  export CLICOLOR=1
+  export LSCOLORS=ExFxCxDxBxegedabagacad
+  export GREP_OPTIONS='--color=auto'
+
+  # for Git-completion
+  if [ -f ~/.bash_scripts/.git-completion.bash ]; then
+    . ~/.bash_scripts/.git-completion.bash
+  fi
+  # for Git-prompt
+  if [ -f ~/.bash_scripts/.git-prompt.sh ]; then
+    source ~/.bash_scripts/.git-prompt.sh
+  fi
+
+  # for GNU Libraries (brew coreutils)
+  export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+  export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+  # for GNU gcc
+  export PATH="/usr/local/gcc-5.3.0/bin:$PATH"
+  # for libtool(ize) 
+  export PATH="/usr/local/Cellar/libtool/2.4.6/bin:$PATH"
+  # for bison
+  export PATH="/usr/local/Cellar/bison/3.0.4/bin:$PATH"
+
+  # for coreutils
+  alias readlink='greadlink'
+
+esac
