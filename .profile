@@ -39,10 +39,6 @@ case $OSTYPE in darwin*)
 
   export LSCOLORS=ExFxCxDxBxegedabagacad
 
-  # for Go
-  export GOPATH=/Users/iceru/PrivateDev/GoBook
-  export PATH=$PATH:$GOPATH/bin
-
   # for GNU Libraries (brew coreutils)
   export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
   export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
@@ -108,6 +104,8 @@ export PATH=/usr/local/git/bin:$PATH
 
 # for GoLang
 export PATH=$PATH:/usr/local/go/bin
+export GOPATH=$HOME/PrivateDev/go
+export PATH=$PATH:$GOPATH/bin
 
 # SERVER address
 export M002_ADDR='125.209.200.190'
