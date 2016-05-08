@@ -30,7 +30,7 @@ C_BG_LIGHTGRAY="\[\033[47m\]"
 export TERM="xterm-color"
 
 # User specific aliases and functions
-PS1="$C_WHITE\D{%H:%M:%S} $C_DEFAULT[$C_LIGHTPURPLE\u$C_DEFAULT@$C_LIGHTYELLOW\H $C_LIGHTGREEN\W$C_PURPLE"'$(__git_ps1 " (%s)")'"$C_DEFAULT]\$ "
+PS1="$C_WHITE\D{%H:%M:%S} $C_DEFAULT[$C_LIGHTPURPLE\u$C_DEFAULT@$C_LIGHTYELLOW\h $C_LIGHTGREEN\W$C_PURPLE"'$(__git_ps1 " (%s)")'"$C_DEFAULT]\$ "
 eval $(dircolors -b $HOME/.dircolors)
 ulimit -c unlimited
 ulimit -n 4096
