@@ -1,3 +1,11 @@
+if [ "$HOSTNAME" == "jam2in-m002" ]; then
+	# .bashrc
+	# Source global definitions
+	if [ -f /etc/bashrc ]; then
+		. /etc/bashrc
+	fi
+fi
+
 ################## Common ###########################
 
 # define colors
@@ -35,13 +43,27 @@ eval $(dircolors -b $HOME/.dircolors)
 ulimit -c unlimited
 ulimit -n 4096
 
-# for Maven
-export MAVEN_HOME=/usr/local/mvn/apache-maven-3.3.9
-export PATH=$PATH:$MAVEN_HOME/bin
+case $HOSTNAME in 
+	jam2in-m002*)
+		# for Git-completion
+		if [ -f ~/.bash_scripts/.git-completion.bash ]; then
+			. ~/.bash_scripts/.git-completion.bash
+		fi
+		# for Git-prompt
+		if [ -f ~/.bash_scripts/.git-prompt.sh ]; then
+			source ~/.bash_scripts/.git-prompt.sh
+		fi
+		export MAVEN_HOME=$HOME/bin/apache-maven/apache-maven-3.2.5
+		export PATH=$PATH:$MAVEN_HOME/bin
+		;;
+	*)
+		export MAVEN_HOME=/usr/local/mvn/apache-maven-3.3.9
+		export PATH=$PATH:$MAVEN_HOME/bin
+		export ANT_HOME=/usr/local/ant/apache-ant-1.9.6
+		export PATH=$PATH:$ANT_HOME/bin;
+	;;		
+esac
 
-# for Ant
-export ANT_HOME=/usr/local/ant/apache-ant-1.9.6
-export PATH=$PATH:$ANT_HOME/bin;
 
 # for ARCUS
 export WORK_HOME=$HOME/Work
@@ -83,18 +105,14 @@ alias treet='tree -htL $1'
 alias m002ssh='ssh wooseok.son@$M002_ADDR'
 
 alias cd_go-path='cd $GOPATH'
-alias cd_c-client-aiceru='cd ~/Work/arcus/repo/aiceru/arcus-c-client'
-alias cd_acp-java-jam2in='cd ~/Work/arcus/repo/jam2in/arcus-misc/acp-java'
+alias cd_c-client-aiceru='cd $HOME/Work/arcus/repo/aiceru/arcus-c-client'
+alias cd_acp-java-jam2in='cd $HOME/Work/arcus/repo/jam2in/arcus-misc/acp-java'
 alias cd_arcus-script-naver='cd $ARCUS_SCRIPTS'
-alias sp='source ~/.profile'
-
-
-case $OSTYPE in linux-gnu*)
-  ################## Mint only ########################
-  . /etc/infinality-settings.sh
-
-esac
-
+if [ "$HOSTNAME" == "jam2in-m002" ]; then
+  alias sp='source ~/.bashrc'
+else
+  alias sp='source ~/.profile'
+fi
 
 case $OSTYPE in darwin*)
   ################## OS X only ########################
