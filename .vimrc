@@ -24,6 +24,8 @@ Plugin 'The-NERD-commenter'
 Plugin 'fatih/vim-go'
 Plugin 'ctrlp.vim'
 Plugin 'vim-airline/vim-airline'
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -49,14 +51,12 @@ endif
 
 "----------------- CTAGS -----------------------
 set tags=./tags
-"set tags+=~/Work/arcus/repo/aiceru/arcus-c-client/tags
 set tags+=~/Work/arcus/repo/naver/arcus/zookeeper/src/c/tags
 "-----------------------------------------------
 
 "----------------- SYNTAX ----------------------
 syntax enable
 set t_Co=256
-set background=dark
 colorscheme molokai
 set nu
 set ruler
@@ -76,7 +76,6 @@ set cst
 set nocsverb
 
 silent cs add cscope.out
-"silent cs add ~/Work/arcus/repo/aiceru/arcus-c-client/cscope.out
 silent cs add ~/Work/arcus/repo/naver/arcus/zookeeper/src/c/cscope.out
 set csverb
 
@@ -124,10 +123,15 @@ let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 let g:go_fmt_command = "goimports"
 let g:go_fmt_fail_silently = 1
-let g:go_fmg_autosave = 0
+let g:go_fmt_autosave = 1
 let g:go_play_open_browser = 0
 let g:go_bin_path=expand("~/.gotools")
 set completeopt=longest,menuone
+
+" useful key mappings
+au FileType go nmap <leader>r <Plug>(go-run)
+au FileType go nmap <leader>b <Plug>(go-build)
+au FileType go nmap <leader>i <Plug>(go-install)
 
 "--------------- ctrlp -------------------------
 " 기본 무시 설정
@@ -177,7 +181,3 @@ nmap <leader>bq :bp <BAR> bd #<CR>
 
 " 모든 버퍼와 각 버퍼 상태 출력
 nmap <leader>bl :ls<CR>
-
-"------------ molokai color -------------------
-let g:molokai_original = 1
-let g:rehash256 = 1

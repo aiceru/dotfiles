@@ -82,10 +82,10 @@ alias treet='tree -htL $1'
 # SSH alias
 alias m002ssh='ssh wooseok.son@$M002_ADDR'
 
-alias golang_start='cd $GOPATH'
-alias go_c_client='cd ~/Work/arcus/repo/aiceru/arcus-c-client'
-alias go_acp='cd ~/Work/arcus/repo/jam2in/arcus-misc/acp-java'
-alias go_arcus_scripts='cd $ARCUS_SCRIPTS'
+alias cd_go-path='cd $GOPATH'
+alias cd_c-client-aiceru='cd ~/Work/arcus/repo/aiceru/arcus-c-client'
+alias cd_acp-java-jam2in='cd ~/Work/arcus/repo/jam2in/arcus-misc/acp-java'
+alias cd_arcus-script-naver='cd $ARCUS_SCRIPTS'
 alias sp='source ~/.profile'
 
 
