@@ -79,7 +79,7 @@ export PATH=/usr/local/git/bin:$PATH
 # for GoLang
 export PATH=$PATH:/usr/local/go/bin
 export GOPATH=$HOME/PrivateDev/go
-export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:$GOPATH/bin:$HOME/.gotools
 
 # SERVER address
 export M002_ADDR='125.209.200.190'
