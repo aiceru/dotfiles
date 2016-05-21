@@ -113,6 +113,7 @@ nnoremap <F11> :set cursorline!<CR>
 noremap <F12> :set invnumber<CR>
 inoremap <F12> <C-O>:set invnumber<CR>
 nnoremap <F9> :!make clean && make<CR>
+nmap <leader>w :w<cr>
 
 "--------------- vim-go ------------------------
 let g:go_highlight_functions = 1
@@ -170,10 +171,10 @@ set hidden
 nmap <leader>T :enew<cr>
 
 " 다음 버퍼로 이동
-nmap <leader>l :bnext<CR>
+nmap <leader>] :bnext<CR>
 
 " 이전 버퍼로 이동
-nmap <leader>h :bprevious<CR>
+nmap <leader>[ :bprevious<CR>
 
 " 현재 버퍼를 닫고 이전 버퍼로 이동
 " 탭 닫기 단축키를 대체한다.
