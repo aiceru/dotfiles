@@ -1,11 +1,12 @@
 [user]
 	name = Wooseok Son
-	email = aiceru@gmail.com
+	email = wooseok.son@jam2in.com
 [core]
 	editor = /usr/bin/vim
 [alias]
 	co = checkout
 	br = branch
+  bra = branch -a
 	ci = commit
 	st = status
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit

@@ -107,6 +107,7 @@ alias cd_go-path='cd $GOPATH'
 alias cd_c-client-aiceru='cd $HOME/Work/arcus/repo/aiceru/arcus-c-client'
 alias cd_acp-java-jam2in='cd $HOME/Work/arcus/repo/jam2in/arcus-misc/acp-java'
 alias cd_arcus-script-naver='cd $ARCUS_SCRIPTS'
+alias cd_java-client-aiceru='cd $WORK_HOME/arcus/repo/aiceru/arcus-java-client'
 if [ "$HOSTNAME" == "jam2in-m002" ]; then
   alias sp='source ~/.bashrc'
 else
@@ -142,6 +143,7 @@ case $OSTYPE in darwin*)
   # for coreutils
   alias readlink='greadlink'
 
+  export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
 esac
 
 # must do this after set PATHs for GNU coreutils in OS X!!
