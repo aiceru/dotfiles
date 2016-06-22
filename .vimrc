@@ -50,7 +50,7 @@ if $TERM_PROGRAM =~ "iTerm"
 endif
 
 "----------------- CTAGS -----------------------
-set tags=./tags
+set tags=./tags,tags;$HOME
 set tags+=~/Work/arcus/repo/naver/arcus/zookeeper/src/c/tags
 "-----------------------------------------------
 
@@ -103,6 +103,7 @@ nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 nnoremap <silent> <F7> :NERDTreeToggle<CR>
 "---------------- TAGBAR -----------------------
 nnoremap <silent> <F8> :TagbarToggle<CR>
+autocmd FileType tagbar setlocal nocursorline nocursorcolumn
 "-----------------------------------------------
 
 nmap <C-\>/ /<C-R>=expand("<cword>")<CR>
@@ -112,8 +113,13 @@ nnoremap <Leader><Space> :noh<CR>
 nnoremap <F11> :set cursorline!<CR>
 noremap <F12> :set invnumber<CR>
 inoremap <F12> <C-O>:set invnumber<CR>
-nnoremap <F9> :!make clean && make<CR>
-nmap <leader>w :w<cr>
+nnoremap <F9> :!make clean<CR>
+nnoremap <F10> :!make CFLAGS='-g -O0' CXXFLAGS='-g -O0'<CR>
+nmap <leader>w :w<CR>
+nmap <leader><F12> :!ctags -R<CR>
+      \:!find . -iname '*.c' -o -iname '*.cpp' -o -iname '*.h' -o -iname '*.hpp' -o -iname '*.cc' -o -iname '*.s' -o -iname '*.S' -o -iname '*.asm' > cscope.files<CR>
+      \:!cscope -b -i cscope.files<CR>
+      \:cs reset<CR>
 
 "--------------- vim-go ------------------------
 let g:go_highlight_functions = 1

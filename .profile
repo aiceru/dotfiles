@@ -72,6 +72,7 @@ export ARCUS_ZOO=$ARCUS_HOME/zookeeper/bin
 export PATH=$PATH:$ARCUS_SCRIPTS:$ARCUS_ZOO
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$ARCUS_HOME/lib
 export ARCUS_DEV_REPO=$WORK_HOME/arcus/repo/aiceru
+export ARCUS_INST=$HOME/Work/arcus/arcus_inst
 
 # for Git
 export PATH=/usr/local/git/bin:$PATH
@@ -104,7 +105,7 @@ alias treet='tree -htL $1'
 alias m002ssh='ssh wooseok.son@$M002_ADDR'
 
 alias cd_go-path='cd $GOPATH'
-alias cd_c-client-aiceru='cd $HOME/Work/arcus/repo/aiceru/arcus-c-client'
+alias cd_c-client-jam2in='cd $HOME/Work/arcus/repo/jam2in/arcus-c-client'
 alias cd_acp-java-jam2in='cd $HOME/Work/arcus/repo/jam2in/arcus-misc/acp-java'
 alias cd_arcus-script-naver='cd $ARCUS_SCRIPTS'
 alias cd_java-client-aiceru='cd $WORK_HOME/arcus/repo/aiceru/arcus-java-client'
