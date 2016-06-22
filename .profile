@@ -85,7 +85,11 @@ export PATH=$PATH:$GOPATH/bin:$HOME/.gotools
 # SERVER address
 export M002_ADDR='125.209.200.190'
 # for Arcus (memcached)
-export ARCUS_CACHE_PUBLIC_IP='127.0.0.1'
+if [ "$HOSTNAME" == "jam2in-m002" ]; then
+  export ARCUS_CACHE_PUBLIC_IP=$M002_ADDR
+else
+  export ARCUS_CACHE_PUBLIC_IP='127.0.0.1'
+fi
 
 # set '--color' options because we use GNU ls, not FreeBSD's ls!!
 alias ls='ls -GFh --color'
