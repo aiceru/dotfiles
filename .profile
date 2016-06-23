@@ -1,9 +1,17 @@
-if [ "$HOSTNAME" == "jam2in-m002" ]; then
-	# .bashrc
-	# Source global definitions
-	if [ -f /etc/bashrc ]; then
-		. /etc/bashrc
-	fi
+if [ "$OSTYPE" == "linux-gnu" ]; then
+  # .bashrc
+  # Source global definitions
+  if [ -f /etc/bashrc ]; then
+    . /etc/bashrc
+  fi
+  # for Git-completion
+  if [ -f ~/.bash_scripts/.git-completion.bash ]; then
+    . ~/.bash_scripts/.git-completion.bash
+  fi
+  # for Git-prompt
+  if [ -f ~/.bash_scripts/.git-prompt.sh ]; then
+    source ~/.bash_scripts/.git-prompt.sh
+  fi
 fi
 
 ################## Common ###########################
@@ -44,14 +52,6 @@ ulimit -n 4096
 
 case $HOSTNAME in 
 	jam2in-m002*)
-		# for Git-completion
-		if [ -f ~/.bash_scripts/.git-completion.bash ]; then
-			. ~/.bash_scripts/.git-completion.bash
-		fi
-		# for Git-prompt
-		if [ -f ~/.bash_scripts/.git-prompt.sh ]; then
-			source ~/.bash_scripts/.git-prompt.sh
-		fi
 		export MAVEN_HOME=$HOME/bin/apache-maven/apache-maven-3.2.5
 		export PATH=$PATH:$MAVEN_HOME/bin
 		;;
