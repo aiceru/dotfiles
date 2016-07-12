@@ -82,6 +82,10 @@ export PATH=$PATH:/usr/local/go/bin
 export GOPATH=$HOME/PrivateDev/go
 export PATH=$PATH:$GOPATH/bin:$HOME/.gotools
 
+# for global CC & CXX
+export CC=gcc
+export CXX=g++
+
 # SERVER address
 export M002_ADDR='125.209.200.190'
 # for Arcus (memcached)
@@ -112,7 +116,7 @@ alias cd_go-path='cd $GOPATH'
 alias cd_c-client-jam2in='cd $HOME/Work/arcus/repo/jam2in/arcus-c-client'
 alias cd_acp-java-jam2in='cd $HOME/Work/arcus/repo/jam2in/arcus-misc/acp-java'
 alias cd_arcus-script-naver='cd $ARCUS_SCRIPTS'
-alias cd_java-client-aiceru='cd $WORK_HOME/arcus/repo/aiceru/arcus-java-client'
+alias cd_java-client-jam2in='cd $WORK_HOME/arcus/repo/jam2in/arcus-java-client'
 if [ "$HOSTNAME" == "jam2in-m002" ]; then
   alias sp='source ~/.bashrc'
 else
