@@ -26,6 +26,7 @@ Plugin 'ctrlp.vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
+Plugin 'elzr/vim-json'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -124,7 +125,7 @@ nnoremap <F10> :!make CFLAGS='-g -O0' CXXFLAGS='-g -O0'<CR>
 nmap <leader>w :w<CR>
 nmap <leader><F12> :!ctags -R<CR>
       \:!find . -iname '*.c' -o -iname '*.cpp' -o -iname '*.h' -o -iname '*.hpp' -o -iname '*.cc' -o -iname '*.s' -o -iname '*.S' -o -iname '*.asm' > cscope.files<CR>
-      \:!cscope -b -i cscope.files<CR>
+      \:!cscope -Rgq<CR>
       \:cs reset<CR>
 
 "--------------- vim-go ------------------------
