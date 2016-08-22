@@ -5,11 +5,12 @@
 	editor = /usr/bin/vim
 [alias]
 	co = checkout
+  cot = checkout --track
 	br = branch
   bra = branch -a
 	ci = commit
 	st = status
-	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	lg = log --branches --remotes --tags --oneline --decorate --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
   fa = fetch --all --prune
 [push]
 	default = tracking 
