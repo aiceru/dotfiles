@@ -81,6 +81,7 @@ export PATH=/usr/local/git/bin:$PATH
 export PATH=$PATH:/usr/local/go/bin
 export GOPATH=$HOME/PrivateDev/go
 export PATH=$PATH:$GOPATH/bin:$HOME/.gotools
+export GOBIN=$GOPATH/bin
 
 # for global CC & CXX
 export CC=gcc
@@ -100,7 +101,7 @@ alias ls='ls -GFh --color'
 alias ll='ls -GFhl --color'
 alias la='ls -GFhal --color'
 
-alias psgrep='ps -ef | grep -v "root " | grep -v "sshd:" | grep -v "\-bash" | grep -v "ps" | grep -v "grep" | grep $USER'
+alias psef='ps -ef | grep "zookeeper\|memcached"'
 
 alias sp='source ~/.profile'
 alias fc='find . -name "*[ch]" -print | xargs grep $1 -H -n'

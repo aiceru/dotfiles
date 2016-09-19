@@ -74,6 +74,7 @@ set tabstop=2
 set smarttab
 set hlsearch
 set cursorline
+set autowrite
 hi CursorLine cterm=NONE ctermbg=236 guibg=#303030
 "----------------- CSCOPE ----------------------
 set csprg=/usr/local/opt/cscope/bin/cscope
@@ -146,6 +147,8 @@ set completeopt=longest,menuone
 au FileType go nmap <leader>r <Plug>(go-run)
 au FileType go nmap <leader>b <Plug>(go-build)
 au FileType go nmap <leader>i <Plug>(go-install)
+au FileType go nmap <Leader>gd <Plug>(go-doc)
+au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
 
 "--------------- ctrlp -------------------------
 " 기본 무시 설정
