@@ -68,9 +68,9 @@ colorscheme molokai
 set nu
 set ruler
 set expandtab
-set shiftwidth=2
-set softtabstop=2
-set tabstop=2
+set shiftwidth=4
+set softtabstop=4
+set tabstop=4
 set smarttab
 set hlsearch
 set cursorline
@@ -122,11 +122,10 @@ nnoremap <F11> :set cursorline!<CR>
 noremap <F12> :set invnumber<CR>
 inoremap <F12> <C-O>:set invnumber<CR>
 nnoremap <F9> :!make clean<CR>
-nnoremap <F10> :!make CFLAGS='-g -O0' CXXFLAGS='-g -O0'<CR>
+nnoremap <F10> :!make CFLAGS='-g -O0' CXXFLAGS='-g -O0' && make install<CR>
 nmap <leader>w :w<CR>
 nmap <leader><F12> :!ctags -R<CR>
-      \:!find . -iname '*.c' -o -iname '*.cpp' -o -iname '*.h' -o -iname '*.hpp' -o -iname '*.cc' -o -iname '*.s' -o -iname '*.S' -o -iname '*.asm' > cscope.files<CR>
-      \:!cscope -Rgq<CR>
+      \:!cscope -Rbq<CR>
       \:cs reset<CR>
 
 "--------------- vim-go ------------------------
@@ -147,6 +146,7 @@ set completeopt=longest,menuone
 au FileType go nmap <leader>r <Plug>(go-run)
 au FileType go nmap <leader>b <Plug>(go-build)
 au FileType go nmap <leader>i <Plug>(go-install)
+au FileType go nmap <leader>gt <Plug>(go-test)
 au FileType go nmap <Leader>gd <Plug>(go-doc)
 au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
 
