@@ -124,9 +124,9 @@ inoremap <F12> <C-O>:set invnumber<CR>
 nnoremap <F9> :!make clean<CR>
 nnoremap <F10> :!make CFLAGS='-g -O0' CXXFLAGS='-g -O0' && make install<CR>
 nmap <leader>w :w<CR>
-nmap <leader><F12> :!ctags -R<CR>
-      \:!cscope -Rbq<CR>
-      \:cs reset<CR>
+nmap <leader><F12> :!find . -iname '*.c' -o -iname '*.cpp' -o -iname '*.h' -o -iname '*.hpp' -o -iname '*.cc' > cscope.files<CR>
+  \:!cscope -b -i cscope.files -f cscope.out<CR>
+  \:cs reset<CR>
 
 "--------------- vim-go ------------------------
 let g:go_highlight_functions = 1
