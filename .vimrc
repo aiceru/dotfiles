@@ -18,7 +18,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'The-NERD-tree'
 Plugin 'Tagbar'
 Plugin 'matchparenpp'
-Plugin 'vim-google-scribe'
+"Plugin 'vim-google-scribe'
 Plugin 'L9'
 Plugin 'The-NERD-commenter'
 Plugin 'fatih/vim-go'
@@ -45,20 +45,14 @@ filetype plugin indent on    " required
 "-----------------------------------------------
 
 "----------------- CURSOR ----------------------
-if $TERM_PROGRAM =~ "iTerm"
-  let &t_SI = "\<Esc>]50;CursorShape=1\x7" " Vertical bar in insert mode
-  let &t_EI = "\<Esc>]50;CursorShape=0\x7" " Block in normal mode
-else
-  if has("autocmd")
-    au InsertEnter * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape ibeam"
-    au InsertLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape block"
-    au VimLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape block"
-  endif
+if has("autocmd")
+au InsertEnter * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape ibeam"
+au InsertLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape block"
+au VimLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape block"
 endif
 
 "----------------- CTAGS -----------------------
 set tags=./tags,tags;$HOME
-set tags+=~/Work/arcus/repo/naver/arcus/zookeeper/src/c/tags
 "-----------------------------------------------
 
 "----------------- SYNTAX ----------------------
@@ -68,9 +62,9 @@ colorscheme molokai
 set nu
 set ruler
 set expandtab
-set shiftwidth=4
-set softtabstop=4
-set tabstop=4
+set shiftwidth=2
+set softtabstop=2
+set tabstop=2
 set smarttab
 set hlsearch
 set cursorline
@@ -84,7 +78,6 @@ set cst
 set nocsverb
 
 silent cs add cscope.out
-silent cs add ~/Work/arcus/repo/naver/arcus/zookeeper/src/c/cscope.out
 set csverb
 
 func! Sts()

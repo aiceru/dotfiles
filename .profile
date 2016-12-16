@@ -1,3 +1,26 @@
+# ~/.profile: executed by the command interpreter for login shells.
+# This file is not read by bash(1), if ~/.bash_profile or ~/.bash_login
+# exists.
+# see /usr/share/doc/bash/examples/startup-files for examples.
+# the files are located in the bash-doc package.
+
+# the default umask is set in /etc/profile; for setting the umask
+# for ssh logins, install and configure the libpam-umask package.
+#umask 022
+
+# if running bash
+if [ -n "$BASH_VERSION" ]; then
+    # include .bashrc if it exists
+    if [ -f "$HOME/.bashrc" ]; then
+	. "$HOME/.bashrc"
+    fi
+fi
+
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/bin" ] ; then
+    PATH="$HOME/bin:$PATH"
+fi
+
 if [ "$OSTYPE" == "linux-gnu" ]; then
   # .bashrc
   # Source global definitions
@@ -5,8 +28,8 @@ if [ "$OSTYPE" == "linux-gnu" ]; then
     . /etc/bashrc
   fi
   # for Git-completion
-  if [ -f ~/.bash_scripts/.git-completion.bash ]; then
-    . ~/.bash_scripts/.git-completion.bash
+  if [ -f ~/.bash_scripts/.git-completion.sh ]; then
+    source ~/.bash_scripts/.git-completion.sh
   fi
   # for Git-prompt
   if [ -f ~/.bash_scripts/.git-prompt.sh ]; then
@@ -50,32 +73,8 @@ PS1="$C_WHITE\D{%H:%M:%S} $C_DEFAULT[$C_LIGHTPURPLE\u$C_DEFAULT@$C_LIGHTYELLOW\h
 ulimit -c unlimited
 ulimit -n 4096
 
-case $HOSTNAME in 
-	jam2in-m002*)
-		export MAVEN_HOME=$HOME/bin/apache-maven/apache-maven-3.2.5
-		export PATH=$PATH:$MAVEN_HOME/bin
-		;;
-	*)
-		export MAVEN_HOME=/usr/local/mvn/apache-maven-3.3.9
-		export PATH=$PATH:$MAVEN_HOME/bin
-		export ANT_HOME=/usr/local/ant/apache-ant-1.9.6
-		export PATH=$PATH:$ANT_HOME/bin;
-	;;		
-esac
-
-
-# for ARCUS
-export WORK_HOME=$HOME/Work
-export ARCUS_HOME=$WORK_HOME/arcus/repo/naver/arcus
-export ARCUS_SCRIPTS=$ARCUS_HOME/scripts
-export ARCUS_ZOO=$ARCUS_HOME/zookeeper/bin
-export PATH=$PATH:$ARCUS_SCRIPTS:$ARCUS_ZOO
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$ARCUS_HOME/lib
-export ARCUS_DEV_REPO=$WORK_HOME/arcus/repo/aiceru
-export ARCUS_INST=$HOME/Work/arcus/arcus_inst
-
 # for Git
-export PATH=/usr/local/git/bin:$PATH
+#export PATH=/usr/local/git/bin:$PATH
 
 # for GoLang
 export PATH=$PATH:/usr/local/go/bin
@@ -87,21 +86,10 @@ export GOBIN=$GOPATH/bin
 export CC=gcc
 export CXX=g++
 
-# SERVER address
-export M002_ADDR='125.209.200.190'
-# for Arcus (memcached)
-if [ "$HOSTNAME" == "jam2in-m002" ]; then
-  export ARCUS_CACHE_PUBLIC_IP=$M002_ADDR
-else
-  export ARCUS_CACHE_PUBLIC_IP='127.0.0.1'
-fi
-
 # set '--color' options because we use GNU ls, not FreeBSD's ls!!
 alias ls='ls -GFh --color'
 alias ll='ls -GFhl --color'
 alias la='ls -GFhal --color'
-
-alias psef='ps -ef | grep "zookeeper\|memcached"'
 
 alias sp='source ~/.profile'
 alias fc='find . -name "*[ch]" -print | xargs grep $1 -H -n'
@@ -110,51 +98,4 @@ alias fj='find . -name "*.java" -print | xargs grep $1 -H -n'
 alias treev='tree -hvL $1'
 alias treet='tree -htL $1'
 
-# SSH alias
-alias m002ssh='ssh wooseok.son@$M002_ADDR'
-
 alias cd_go-path='cd $GOPATH'
-alias cd_c-client-jam2in='cd $HOME/Work/arcus/repo/jam2in/arcus-c-client'
-alias cd_acp-java-jam2in='cd $HOME/Work/arcus/repo/jam2in/arcus-misc/acp-java'
-alias cd_arcus-script-naver='cd $ARCUS_SCRIPTS'
-alias cd_java-client-jam2in='cd $WORK_HOME/arcus/repo/jam2in/arcus-java-client'
-if [ "$HOSTNAME" == "jam2in-m002" ]; then
-  alias sp='source ~/.bashrc'
-else
-  alias sp='source ~/.profile'
-fi
-
-case $OSTYPE in darwin*)
-  ################## OS X only ########################
-
-  export CLICOLOR=1
-  export LSCOLORS=ExFxCxDxBxegedabagacad
-  export GREP_OPTIONS='--color=auto'
-
-  # for Git-completion
-  if [ -f ~/.bash_scripts/.git-completion.bash ]; then
-    . ~/.bash_scripts/.git-completion.bash
-  fi
-  # for Git-prompt
-  if [ -f ~/.bash_scripts/.git-prompt.sh ]; then
-    source ~/.bash_scripts/.git-prompt.sh
-  fi
-
-  # for GNU Libraries (brew coreutils)
-  export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
-  export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
-  # for GNU gcc
-  export PATH="/usr/local/gcc-5.3.0/bin:$PATH"
-  # for libtool(ize) 
-  export PATH="/usr/local/Cellar/libtool/2.4.6/bin:$PATH"
-  # for bison
-  export PATH="/usr/local/Cellar/bison/3.0.4/bin:$PATH"
-
-  # for coreutils
-  alias readlink='greadlink'
-
-  export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
-esac
-
-# must do this after set PATHs for GNU coreutils in OS X!!
-eval $(dircolors -b $HOME/.dircolors)
