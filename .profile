@@ -86,16 +86,16 @@ export GOBIN=$GOPATH/bin
 export CC=gcc
 export CXX=g++
 
+# for Android NDK build tools
+export PATH=$PATH:/home/wooseok/IDEs/Android/Sdk/ndk-bundle
+
 # set '--color' options because we use GNU ls, not FreeBSD's ls!!
-alias ls='ls -GFh --color'
-alias ll='ls -GFhl --color'
-alias la='ls -GFhal --color'
+alias ls='ls -CFh --color=auto'
+alias ll='ls -CFhl --color=auto'
+alias la='ls -CFhal --color=auto'
 
 alias sp='source ~/.profile'
 alias fc='find . -name "*[ch]" -print | xargs grep $1 -H -n'
 alias fj='find . -name "*.java" -print | xargs grep $1 -H -n'
-
-alias treev='tree -hvL $1'
-alias treet='tree -htL $1'
 
 alias cd_go-path='cd $GOPATH'

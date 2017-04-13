@@ -18,14 +18,12 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'The-NERD-tree'
 Plugin 'Tagbar'
 Plugin 'matchparenpp'
-"Plugin 'vim-google-scribe'
 Plugin 'L9'
 Plugin 'The-NERD-commenter'
 Plugin 'fatih/vim-go'
 Plugin 'ctrlp.vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'godlygeek/tabular'
-Plugin 'plasticboy/vim-markdown'
 Plugin 'elzr/vim-json'
 
 " All of your Plugins must be added before the following line
@@ -43,16 +41,32 @@ filetype plugin indent on    " required
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 "-----------------------------------------------
-
-"----------------- CURSOR ----------------------
+"---------------- CURSOR -----------------------
 if has("autocmd")
-au InsertEnter * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape ibeam"
-au InsertLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape block"
-au VimLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape block"
+  au VimEnter,InsertLeave * silent execute '!echo -ne "\e[1 q"' | redraw!
+  au InsertEnter,InsertChange *
+        \ if v:insertmode == 'i' | 
+        \   silent execute '!echo -ne "\e[5 q"' | redraw! |
+        \ elseif v:insertmode == 'r' |
+        \   silent execute '!echo -ne "\e[3 q"' | redraw! |
+        \ endif
+  au VimLeave * silent execute '!echo -ne "\e[ q"' | redraw!
 endif
-
 "----------------- CTAGS -----------------------
-set tags=./tags,tags;$HOME
+function SetTags()
+  let curdir = getcwd()
+  while !filereadable("tags") && getcwd() != "/"
+    cd ..
+  endwhile
+
+  if filereadable("tags")
+    execute "set tags=" . getcwd() . "/tags"
+    execute "set path+=" . getcwd() . "/**"
+  endif
+
+  execute "cd " . curdir
+endfunction
+call SetTags()
 "-----------------------------------------------
 
 "----------------- SYNTAX ----------------------
@@ -69,16 +83,28 @@ set smarttab
 set hlsearch
 set cursorline
 set autowrite
-hi CursorLine cterm=NONE ctermbg=236 guibg=#303030
+set fencs=utf-8,euc-kr,cp949
+set fileencoding=utf-8
+hi CursorLine cterm=NONE ctermbg=237 guibg=#303030
+"hi Normal ctermbg=none
+"highlight NonText ctermbg=none
 "----------------- CSCOPE ----------------------
-set csprg=/usr/local/opt/cscope/bin/cscope
+set csprg=/usr/bin/cscope
 
 set csto=0
 set cst
 set nocsverb
 
-silent cs add cscope.out
-set csverb
+function! LoadCscope()
+  let db = findfile("cscope.out", ".;")
+  if (!empty(db))
+    let path = strpart(db, 0, match(db, "/cscope.out$"))
+    set nocscopeverbose " suppress 'duplicate connection' error
+    exe "cs add " . db . " " . path
+    set cscopeverbose
+  endif
+endfunction
+au BufEnter /* call LoadCscope()
 
 func! Sts()
   let st = expand("<cword>")
@@ -101,25 +127,31 @@ nmap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
 nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 
 "---------------- NERDTREE ---------------------
+" Open Nerdtree automatically
+"autocmd vimenter * NERDTree
+"autocmd vimenter * wincmd p
+" Close Nerdtree if no files specified
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+" Nerdtree behavior
 nnoremap <silent> <F7> :NERDTreeToggle<CR>
+let NERDTreeHighlightCursorline=1
 "---------------- TAGBAR -----------------------
 nnoremap <silent> <F8> :TagbarToggle<CR>
+"autocmd vimenter * Tagbar
 autocmd FileType tagbar setlocal nocursorline nocursorcolumn
 "-----------------------------------------------
 
-nmap <C-\>/ /<C-R>=expand("<cword>")<CR>
+nmap <C-\>/ /<C-R>=expand("<cword>")<CR><CR>
 
 "--------------- CUSTOM CMD --------------------
 nnoremap <Leader><Space> :noh<CR>
+nnoremap <Leader><F1> :source ~/.vimrc<CR>
 nnoremap <F11> :set cursorline!<CR>
 noremap <F12> :set invnumber<CR>
 inoremap <F12> <C-O>:set invnumber<CR>
 nnoremap <F9> :!make clean<CR>
-nnoremap <F10> :!make CFLAGS='-g -O0' CXXFLAGS='-g -O0' && make install<CR>
+nnoremap <F10> :!make -k<CR>
 nmap <leader>w :w<CR>
-nmap <leader><F12> :!find . -iname '*.c' -o -iname '*.cpp' -o -iname '*.h' -o -iname '*.hpp' -o -iname '*.cc' > cscope.files<CR>
-  \:!cscope -b -i cscope.files -f cscope.out<CR>
-  \:cs reset<CR>
 
 "--------------- vim-go ------------------------
 let g:go_highlight_functions = 1

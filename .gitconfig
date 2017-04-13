@@ -1,16 +1,32 @@
 [user]
-	name = Wooseok Son
-	email = wooseok.son@hecas.co.kr
+  name = Wooseok Son
+  email = wooseok.son@hecas.co.kr
 [core]
-	editor = /usr/bin/vim
+  editor = /usr/bin/vim
+  repositoryformatversion = 0
+  filemode = false
+  bare = false
+  logallrefupdates = true
+  symlinks = false
+  ignorecase = true
+  hideDotFiles = dotGitOnly
+  packedGitLimit = 256m
+  packedGitWindowSize = 256m
+  longpaths = true
 [alias]
-	co = checkout
+  co = checkout
   cot = checkout --track
-	br = branch
+  br = branch
   bra = branch -a
-	ci = commit
-	st = status
-	lg = log --branches --remotes --tags --oneline --decorate --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+  ci = commit
+  st = status
+  lg = log --branches --remotes --tags --oneline --decorate --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cd) %C(bold blue)<%an>%Creset' --abbrev-commit
   fa = fetch --all --prune
 [push]
-	default = tracking 
+  default = tracking 
+[http]
+  postBuffer = 524288000
+[pack]
+  deltaCacheSize = 256m
+  packSizeLimit = 256m
+  windowMemory = 1024m
