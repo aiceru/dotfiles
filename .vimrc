@@ -171,9 +171,21 @@ set completeopt=longest,menuone
 au FileType go nmap <leader>r <Plug>(go-run)
 au FileType go nmap <leader>b <Plug>(go-build)
 au FileType go nmap <leader>i <Plug>(go-install)
-au FileType go nmap <leader>gt <Plug>(go-test)
+au FileType go nmap <leader>t <Plug>(go-test)
 au FileType go nmap <Leader>gd <Plug>(go-doc)
 au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
+au FileType go nnoremap <Leader>a :cclose<CR>
+au FileType go map <C-n> :cnext<CR>
+au FileType go map <C-m> :cprevious<CR>
+
+function! s:build_go_files()
+  let l:file = expand('%')
+  if l:file =~# '^\f\+_test\.go$'
+    call go#cmd#Test(0, 1)
+  elseif l:file =~# '^\f\+\.go$'
+    call go#cmd#Build(0)
+  endif
+endfunction
 
 "--------------- ctrlp -------------------------
 " 기본 무시 설정
