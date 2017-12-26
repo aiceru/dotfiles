@@ -150,7 +150,7 @@ nnoremap <F11> :set cursorline!<CR>
 noremap <F12> :set invnumber<CR>
 inoremap <F12> <C-O>:set invnumber<CR>
 nnoremap <F9> :!make clean<CR>
-nnoremap <F10> :!make -k<CR>
+nnoremap <F10> :!make -j 4<CR>
 nmap <leader>w :w<CR>
 
 "--------------- vim-go ------------------------
@@ -165,6 +165,7 @@ let g:go_fmt_fail_silently = 1
 let g:go_fmt_autosave = 1
 let g:go_play_open_browser = 0
 let g:go_bin_path=expand("~/.gotools")
+let g:go_template_autocreate = 1
 set completeopt=longest,menuone
 
 " useful key mappings
