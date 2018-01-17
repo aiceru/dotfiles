@@ -164,8 +164,8 @@ let g:go_fmt_command = "goimports"
 let g:go_fmt_fail_silently = 1
 let g:go_fmt_autosave = 1
 let g:go_play_open_browser = 0
-let g:go_bin_path=expand("~/.gotools")
-let g:go_template_autocreate = 1
+let g:go_bin_path=expand("$GOPATH/bin")
+let g:go_template_autocreate = 0
 let g:go_version_warning = 0
 set completeopt=longest,menuone
 
