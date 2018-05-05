@@ -21,7 +21,7 @@ if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
 
-if [ "$OSTYPE" == "linux-gnu" ]; then
+#if [ "$OSTYPE" == "linux-gnu" ]; then
   # .bashrc
   # Source global definitions
   if [ -f /etc/bashrc ]; then
@@ -35,7 +35,7 @@ if [ "$OSTYPE" == "linux-gnu" ]; then
   if [ -f ~/.bash_scripts/.git-prompt.sh ]; then
     source ~/.bash_scripts/.git-prompt.sh
   fi
-fi
+#fi
 
 ################## Common ###########################
 
@@ -89,12 +89,20 @@ export CXX=g++
 # for Android NDK build tools
 export PATH=$PATH:/home/wooseok/IDEs/Android/Sdk/ndk-bundle
 
-# set '--color' options because we use GNU ls, not FreeBSD's ls!!
-alias ls='ls -CFh --color=auto'
-alias ll='ls -CFhl --color=auto'
-alias la='ls -CFhal --color=auto'
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+  MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+  test -e ~/.dircolors && \
+    eval `dircolors -b ~/.dircolors`
+fi
 
-alias sp='source ~/.profile'
+# set '--color' options because we use GNU ls, not FreeBSD's ls!!
+alias ls='ls -CFh --color=always'
+alias ll='ls -CFhl --color=always'
+alias la='ls -CFhal --color=always'
+alias grep='grep --color=always'
+alias diff='diff --color'
+
 alias fc='find . -name "*[ch]" -print | xargs grep $1 -H -n'
 alias fj='find . -name "*.java" -print | xargs grep $1 -H -n'
 
