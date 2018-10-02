@@ -1,13 +1,13 @@
 [user]
-  name = Wooseok Son
-  email = aiceru@gmail.com
+	name = 미디어기술원 손우석
+	email = wooseok.son@sk.com
 [core]
   editor = /usr/bin/vim
   repositoryformatversion = 0
   filemode = false
   bare = false
   logallrefupdates = true
-  symlinks = true
+  symlinks = false
   ignorecase = true
   hideDotFiles = dotGitOnly
   packedGitLimit = 256m
@@ -30,3 +30,21 @@
   deltaCacheSize = 256m
   packSizeLimit = 256m
   windowMemory = 1024m
+[color]
+  branch = auto
+  diff = auto
+  status = auto
+  showbranch = auto
+  ui = true
+[color "branch"]
+  current = yellow reverse
+  local = yellow
+  remote = green
+[color "branch"]
+  current = yellow reverse
+  local = yellow
+  remote = green
+[color "status"]
+  added = yellow
+  changed = green
+  untracked = cyan

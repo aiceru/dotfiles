@@ -17,7 +17,7 @@ Plugin 'tpope/vim-sensible'
 Plugin 'tpope/vim-fugitive'
 Plugin 'The-NERD-tree'
 Plugin 'Tagbar'
-Plugin 'matchparenpp'
+"Plugin 'matchparenpp'
 Plugin 'L9'
 Plugin 'The-NERD-commenter'
 Plugin 'fatih/vim-go'
@@ -25,6 +25,8 @@ Plugin 'ctrlp.vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'godlygeek/tabular'
 Plugin 'elzr/vim-json'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'vim-scripts/Conque-GDB'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -45,7 +47,7 @@ filetype plugin indent on    " required
 if has("autocmd")
   au VimEnter,InsertLeave * silent execute '!echo -ne "\e[1 q"' | redraw!
   au InsertEnter,InsertChange *
-        \ if v:insertmode == 'i' | 
+        \ if v:insertmode == 'i' |
         \   silent execute '!echo -ne "\e[5 q"' | redraw! |
         \ elseif v:insertmode == 'r' |
         \   silent execute '!echo -ne "\e[3 q"' | redraw! |
@@ -85,7 +87,10 @@ set cursorline
 set autowrite
 set fencs=utf-8,euc-kr,cp949
 set fileencoding=utf-8
+set ffs=unix
 hi CursorLine cterm=NONE ctermbg=237 guibg=#303030
+hi OverLength cterm=NONE ctermbg=237 guibg=#303030
+match OverLength /\%121v.\+/
 "hi Normal ctermbg=none
 "highlight NonText ctermbg=none
 "----------------- CSCOPE ----------------------
@@ -118,11 +123,11 @@ func! Tj()
 endfunc
 nmap ,tj :call Tj()<CR>
 nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
-nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>	
-nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>	
-nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>	
-nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>	
-nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>	
+nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
 nmap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
 nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 
@@ -150,7 +155,7 @@ nnoremap <F11> :set cursorline!<CR>
 noremap <F12> :set invnumber<CR>
 inoremap <F12> <C-O>:set invnumber<CR>
 nnoremap <F9> :!make clean<CR>
-nnoremap <F10> :!make -j 4<CR>
+nnoremap <F10> :!make<CR>
 nmap <leader>w :w<CR>
 
 "--------------- vim-go ------------------------
@@ -179,6 +184,7 @@ au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
 au FileType go nnoremap <Leader>a :cclose<CR>
 au FileType go map <C-n> :cnext<CR>
 au FileType go map <C-m> :cprevious<CR>
+au FileType go inoremap <C-Space> <C-x><C-o>
 
 function! s:build_go_files()
   let l:file = expand('%')
@@ -237,3 +243,28 @@ nmap <leader>bq :bp <BAR> bd #<CR>
 
 " 모든 버퍼와 각 버퍼 상태 출력
 nmap <leader>bl :ls<CR>
+
+au BufNewFile,BufRead *.log set filetype=iwaylog
+
+" Conque-GDB
+let g:ConqueTerm_Color = 2
+let g:ConqueTerm_CloseOnEnd = 1
+let g:ConqueTerm_StartMessages = 0
+
+function DebugSession()
+  silent make -o vimgdb -gcflags "-N -l"
+  redraw!
+  if (filereadable("vimgdb"))
+    ConqueGdb vimgdb
+  else
+    echom "Couldn't find debug file"
+  endif
+endfunction
+function DebugSessionCleanup(term)
+  if (filereadable("vimgdb"))
+    let ds=delete("vimgdb")
+  endif
+endfunction
+call conque_term#register_function("after_close", "DebugSessionCleanup")
+nmap <leader>d :call DebugSession()<CR>;
+
