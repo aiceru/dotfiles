@@ -47,7 +47,7 @@ filetype plugin indent on    " required
 if has("autocmd")
   au VimEnter,InsertLeave * silent execute '!echo -ne "\e[1 q"' | redraw!
   au InsertEnter,InsertChange *
-        \ if v:insertmode == 'i' |
+        \ if v:insertmode == 'i' | 
         \   silent execute '!echo -ne "\e[5 q"' | redraw! |
         \ elseif v:insertmode == 'r' |
         \   silent execute '!echo -ne "\e[3 q"' | redraw! |
@@ -87,6 +87,7 @@ set cursorline
 set autowrite
 set fencs=utf-8,euc-kr,cp949
 set fileencoding=utf-8
+set encoding=utf-8
 set ffs=unix
 hi CursorLine cterm=NONE ctermbg=237 guibg=#303030
 hi OverLength cterm=NONE ctermbg=237 guibg=#303030
@@ -123,11 +124,11 @@ func! Tj()
 endfunc
 nmap ,tj :call Tj()<CR>
 nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
-nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>
-nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>
-nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>
-nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>
-nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
+nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>	
+nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>	
+nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>	
+nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>	
+nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>	
 nmap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
 nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 
@@ -155,7 +156,7 @@ nnoremap <F11> :set cursorline!<CR>
 noremap <F12> :set invnumber<CR>
 inoremap <F12> <C-O>:set invnumber<CR>
 nnoremap <F9> :!make clean<CR>
-nnoremap <F10> :!make<CR>
+nnoremap <F10> :!cd build && make && cd ..<CR>
 nmap <leader>w :w<CR>
 
 "--------------- vim-go ------------------------
@@ -165,13 +166,15 @@ let g:go_highlight_structs = 1
 let g:go_highlight_interfaces = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
-let g:go_fmt_command = "goimports"
+" let g:go_fmt_command = "goimports"
 let g:go_fmt_fail_silently = 1
 let g:go_fmt_autosave = 1
 let g:go_play_open_browser = 0
 let g:go_bin_path=expand("$GOPATH/bin")
 let g:go_template_autocreate = 0
 let g:go_version_warning = 0
+let g:go_auto_type_info = 1
+let g:go_auto_sameids = 1
 set completeopt=longest,menuone
 
 " useful key mappings
@@ -247,24 +250,24 @@ nmap <leader>bl :ls<CR>
 au BufNewFile,BufRead *.log set filetype=iwaylog
 
 " Conque-GDB
-let g:ConqueTerm_Color = 2
-let g:ConqueTerm_CloseOnEnd = 1
-let g:ConqueTerm_StartMessages = 0
+let g:ConqueTerm_Color = 2                                                            
+let g:ConqueTerm_CloseOnEnd = 1                                                       
+let g:ConqueTerm_StartMessages = 0                                                    
 
-function DebugSession()
-  silent make -o vimgdb -gcflags "-N -l"
-  redraw!
-  if (filereadable("vimgdb"))
-    ConqueGdb vimgdb
-  else
-    echom "Couldn't find debug file"
-  endif
-endfunction
-function DebugSessionCleanup(term)
-  if (filereadable("vimgdb"))
-    let ds=delete("vimgdb")
-  endif
-endfunction
-call conque_term#register_function("after_close", "DebugSessionCleanup")
+function DebugSession()                                                               
+  silent make -o vimgdb -gcflags "-N -l"                                            
+  redraw!                                                                           
+  if (filereadable("vimgdb"))                                                       
+    ConqueGdb vimgdb                                                              
+  else                                                                              
+    echom "Couldn't find debug file"                                              
+  endif                                                                             
+endfunction                                                                           
+function DebugSessionCleanup(term)                                                    
+  if (filereadable("vimgdb"))                                                       
+    let ds=delete("vimgdb")                                                       
+  endif                                                                             
+endfunction                                                                           
+call conque_term#register_function("after_close", "DebugSessionCleanup")              
 nmap <leader>d :call DebugSession()<CR>;
 

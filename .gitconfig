@@ -2,7 +2,7 @@
 	name = 미디어기술원 손우석
 	email = wooseok.son@sk.com
 [core]
-  editor = /usr/bin/vim
+  editor = /usr/local/bin/vim
   repositoryformatversion = 0
   filemode = false
   bare = false

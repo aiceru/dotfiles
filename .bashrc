@@ -1,32 +1,21 @@
-# ~/.profile: executed by the command interpreter for login shells.
-# This file is not read by bash(1), if ~/.bash_profile or ~/.bash_login
-# exists.
-# see /usr/share/doc/bash/examples/startup-files for examples.
-# the files are located in the bash-doc package.
+# .bashrc
 
-# the default umask is set in /etc/profile; for setting the umask
-# for ssh logins, install and configure the libpam-umask package.
-#umask 022
-
-# if running bash
-if [ -n "$BASH_VERSION" ]; then
-    # include .bashrc if it exists
-    if [ -f "$HOME/.bashrc" ]; then
-	. "$HOME/.bashrc"
-    fi
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+	. /etc/bashrc
 fi
+
+# Uncomment the following line if you don't like systemctl's auto-paging feature:
+# export SYSTEMD_PAGER=
+
+# User specific aliases and functions
 
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
 
-#if [ "$OSTYPE" == "linux-gnu" ]; then
-  # .bashrc
-  # Source global definitions
-  if [ -f /etc/bashrc ]; then
-    . /etc/bashrc
-  fi
+if [ "$OSTYPE" == "linux-gnu" ]; then
   # for Git-completion
   if [ -f ~/.bash_scripts/.git-completion.sh ]; then
     source ~/.bash_scripts/.git-completion.sh
@@ -35,7 +24,7 @@ fi
   if [ -f ~/.bash_scripts/.git-prompt.sh ]; then
     source ~/.bash_scripts/.git-prompt.sh
   fi
-#fi
+fi
 
 ################## Common ###########################
 
@@ -78,8 +67,8 @@ ulimit -n 4096
 
 # for GoLang
 export PATH=$PATH:/usr/local/go/bin
-export GOPATH=$HOME/PrivateDev/go
-export PATH=$PATH:$GOPATH/bin:$HOME/.gotools
+export GOPATH=$HOME/private-dev/go
+export PATH=$PATH:$GOPATH/bin
 export GOBIN=$GOPATH/bin
 
 # for global CC & CXX
@@ -87,7 +76,7 @@ export CC=gcc
 export CXX=g++
 
 # for Android NDK build tools
-export PATH=$PATH:/home/wooseok/IDEs/Android/Sdk/ndk-bundle
+export PATH=$PATH:$HOME/IDEs/Android/Sdk/ndk-bundle
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
   PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
@@ -97,11 +86,9 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 fi
 
 # set '--color' options because we use GNU ls, not FreeBSD's ls!!
-alias ls='ls -CFh --color=always'
-alias ll='ls -CFhl --color=always'
-alias la='ls -CFhal --color=always'
-alias grep='grep --color=always'
-alias diff='diff --color'
+alias ls='ls -CFh --color=auto'
+alias ll='ls -CFhl --color=auto'
+alias la='ls -CFhal --color=auto'
 
 alias fc='find . -name "*[ch]" -print | xargs grep $1 -H -n'
 alias fj='find . -name "*.java" -print | xargs grep $1 -H -n'
