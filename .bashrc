@@ -94,3 +94,5 @@ alias fc='find . -name "*[ch]" -print | xargs grep $1 -H -n'
 alias fj='find . -name "*.java" -print | xargs grep $1 -H -n'
 
 alias cd_go-path='cd $GOPATH'
+alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+config config --local status.showUntrackedFiles no
