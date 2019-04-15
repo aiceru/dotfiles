@@ -17,7 +17,7 @@ Plugin 'tpope/vim-sensible'
 Plugin 'tpope/vim-fugitive'
 Plugin 'The-NERD-tree'
 Plugin 'Tagbar'
-"Plugin 'matchparenpp'
+Plugin 'matchparenpp'
 Plugin 'L9'
 Plugin 'The-NERD-commenter'
 Plugin 'fatih/vim-go'
@@ -27,6 +27,7 @@ Plugin 'godlygeek/tabular'
 Plugin 'elzr/vim-json'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'vim-scripts/Conque-GDB'
+Plugin 'rdnetto/YCM-Generator'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -255,6 +256,11 @@ nmap <leader>bq :bp <BAR> bd #<CR>
 nmap <leader>bl :ls<CR>
 
 au BufNewFile,BufRead *.log set filetype=iwaylog
+
+"-------------------YouCompleteMe-----------------
+let g:ycm_compilation_database_folder = 'build'
+let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
+let g:ycm_extra_conf_vim_data = [ 'g:ycm_compilation_database_folder' ]
 
 " Conque-GDB
 let g:ConqueTerm_Color = 2                                                            
