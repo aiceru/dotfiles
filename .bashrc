@@ -15,16 +15,16 @@ if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
 
-if [ "$OSTYPE" == "linux-gnu" ]; then
-  # for Git-completion
-  if [ -f ~/.bash_scripts/.git-completion.sh ]; then
-    source ~/.bash_scripts/.git-completion.sh
-  fi
-  # for Git-prompt
-  if [ -f ~/.bash_scripts/.git-prompt.sh ]; then
-    source ~/.bash_scripts/.git-prompt.sh
-  fi
+#if [ "$OSTYPE" == "linux-gnu" ]; then
+# for Git-completion
+if [ -f ~/.bash_scripts/.git-completion.sh ]; then
+  source ~/.bash_scripts/.git-completion.sh
 fi
+# for Git-prompt
+if [ -f ~/.bash_scripts/.git-prompt.sh ]; then
+  source ~/.bash_scripts/.git-prompt.sh
+fi
+#fi
 
 ################## Common ###########################
 
