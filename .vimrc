@@ -17,7 +17,7 @@ Plugin 'tpope/vim-sensible'
 Plugin 'tpope/vim-fugitive'
 Plugin 'The-NERD-tree'
 Plugin 'Tagbar'
-Plugin 'matchparenpp'
+"Plugin 'matchparenpp'
 Plugin 'L9'
 Plugin 'The-NERD-commenter'
 Plugin 'fatih/vim-go'
@@ -104,6 +104,9 @@ match OverLength /\%121v.\+/
 "highlight NonText ctermbg=none
 "----------------- CSCOPE ----------------------
 set csprg=/usr/bin/cscope
+if has('mac')
+  set csprg=/usr/local/bin/cscope
+endif
 
 set csto=0
 set cst
