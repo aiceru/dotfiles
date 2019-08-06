@@ -66,7 +66,6 @@ ulimit -n 4096
 #export PATH=/usr/local/git/bin:$PATH
 
 # for GoLang
-export PATH=$PATH:/usr/local/go/bin
 export GOPATH=$HOME/private-dev/go
 export PATH=$PATH:$GOPATH/bin
 export GOBIN=$GOPATH/bin
