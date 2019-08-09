@@ -82,6 +82,8 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
   test -e ~/.dircolors && \
     eval `dircolors -b ~/.dircolors`
+elif [[ "$OSTYPE" == "linux-gnu" ]]; then
+  export PATH=$PATH:/usr/local/go/bin
 fi
 
 # set '--color' options because we use GNU ls, not FreeBSD's ls!!
