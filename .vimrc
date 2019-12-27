@@ -177,7 +177,7 @@ let g:go_highlight_structs = 1
 let g:go_highlight_interfaces = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
-" let g:go_fmt_command = "goimports"
+let g:go_fmt_command = "goimports"
 let g:go_fmt_fail_silently = 1
 let g:go_fmt_autosave = 1
 let g:go_play_open_browser = 0
@@ -193,8 +193,8 @@ au FileType go nmap <leader>r <Plug>(go-run)
 au FileType go nmap <leader>b <Plug>(go-build)
 au FileType go nmap <leader>i <Plug>(go-install)
 au FileType go nmap <leader>t <Plug>(go-test)
-au FileType go nmap <Leader>gd <Plug>(go-doc)
-au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
+au FileType go nmap <C-I> <Plug>(go-import)
+au FileType go nmap <S-K> <Plug>(go-doc)
 au FileType go nnoremap <Leader>a :cclose<CR>
 au FileType go map <C-n> :cnext<CR>
 au FileType go map <C-m> :cprevious<CR>

@@ -82,11 +82,14 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
   test -e ~/.dircolors && \
     eval `dircolors -b ~/.dircolors`
+  eval "$(rbenv init -)"
+  export LC_ALL=en_US
 elif [[ "$OSTYPE" == "linux-gnu" ]]; then
   export PATH=$PATH:/usr/local/go/bin
 fi
 
 # set '--color' options because we use GNU ls, not FreeBSD's ls!!
+alias lso='ls'
 alias ls='ls -CFh --color=auto'
 alias ll='ls -CFhl --color=auto'
 alias la='ls -CFhal --color=auto'
@@ -96,6 +99,12 @@ alias fj='find . -name "*.java" -print | xargs grep $1 -H -n'
 
 alias omake='cd build && make && cd .. || cd ..'
 
-alias cd_go-path='cd $GOPATH'
+alias cd-go-home='cd $GOPATH/src/github.com/aiceru/'
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 config config --local status.showUntrackedFiles no
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/aiceru/private-dev/google-cloud-sdk/path.bash.inc' ]; then . '/Users/aiceru/private-dev/google-cloud-sdk/path.bash.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/aiceru/private-dev/google-cloud-sdk/completion.bash.inc' ]; then . '/Users/aiceru/private-dev/google-cloud-sdk/completion.bash.inc'; fi
