@@ -110,7 +110,7 @@ prompt_context() {
 export LC_ALL=ko_KR.UTF-8
 
 # for GoLang
-export GOPATH=$HOME/private-dev/go
+export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 export GOBIN=$GOPATH/bin
 
