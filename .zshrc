@@ -124,8 +124,3 @@ alias fj='find . -name "*.java" -print | xargs grep $1 -H -n'
 alias omake='cd build && make && cd .. || cd ..'
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 config config --local status.showUntrackedFiles no
-
-if [ -z "$SSH_AUTH_SOCK" ] ; then
-  eval `ssh-agent -s`
-  ssh-add ~/.ssh/aiceru-gmail
-fi
