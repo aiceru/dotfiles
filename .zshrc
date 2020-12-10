@@ -111,7 +111,7 @@ export LC_ALL=ko_KR.UTF-8
 
 # for GoLang
 export GOPATH=$HOME/go
-export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
 export GOBIN=$GOPATH/bin
 
 # for global CC & CXX
@@ -124,8 +124,3 @@ alias fj='find . -name "*.java" -print | xargs grep $1 -H -n'
 alias omake='cd build && make && cd .. || cd ..'
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 config config --local status.showUntrackedFiles no
-
-if [ -z "$SSH_AUTH_SOCK" ] ; then
-  eval `ssh-agent -s`
-  ssh-add ~/.ssh/aiceru-gmail
-fi
