@@ -1,8 +1,10 @@
 [user]
 	name = Wooseok Son
-	email = aiceru@gmail.com
+  email = aiceru@gmail.com
+[includeIf "gitdir:~/go/src/github.com/venticake/"]
+  path = ~/go/src/github.com/venticake/.gitconfig
 [core]
-  editor = /usr/local/bin/vim
+  editor = /usr/bin/vim
   repositoryformatversion = 0
   filemode = false
   bare = false
@@ -13,6 +15,8 @@
   packedGitLimit = 256m
   packedGitWindowSize = 256m
   longpaths = true
+[url "ssh://git@github.com/"]
+  insteadOf = https://github.com/
 [alias]
   co = checkout
   cot = checkout --track
@@ -48,3 +52,8 @@
   added = yellow
   changed = green
   untracked = cyan
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

@@ -129,3 +129,8 @@ alias omake='cd build && make && cd .. || cd ..'
 alias cd-go-home='cd $GOPATH/src/github.com/aiceru/'
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 config config --local status.showUntrackedFiles no
+
+if [ -z "$SSH_AUTH_SOCK" ] ; then
+  eval `ssh-agent -s`
+  ssh-add ~/.ssh/aiceru-gmail
+fi
