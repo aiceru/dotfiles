@@ -1,8 +1,6 @@
 [user]
-	name = Wooseok Son
+	name = aiceru
   email = aiceru@gmail.com
-[includeIf "gitdir:~/go/src/github.com/venticake/"]
-  path = ~/go/src/github.com/venticake/.gitconfig
 [core]
   editor = /usr/bin/vim
   repositoryformatversion = 0
@@ -15,19 +13,19 @@
   packedGitLimit = 256m
   packedGitWindowSize = 256m
   longpaths = true
-[url "ssh://git@github.com/"]
-  insteadOf = https://github.com/
 [alias]
   co = checkout
   cot = checkout --track
   br = branch
   bra = branch -a
-  ci = commit
+  cm = commit
   st = status
   lg = log --branches --remotes --tags --oneline --decorate --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cd) %C(bold blue)<%an>%Creset' --abbrev-commit
   fa = fetch --all --prune
 [push]
   default = tracking 
+[pull]
+  rebase = true
 [http]
   postBuffer = 524288000
 [pack]
@@ -44,10 +42,6 @@
   current = yellow reverse
   local = yellow
   remote = green
-[color "branch"]
-  current = yellow reverse
-  local = yellow
-  remote = green
 [color "status"]
   added = yellow
   changed = green
@@ -57,3 +51,5 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+#[includeIf "gitdir:D:/Retrica/repos/"]
+#  path = D:/Retrica/repos/.gitconfig-retrica
