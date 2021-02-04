@@ -121,6 +121,12 @@ export CXX=g++
 alias fc='find . -name "*[ch]" -print | xargs grep $1 -H -n'
 alias fj='find . -name "*.java" -print | xargs grep $1 -H -n'
 
-alias omake='cd build && make && cd .. || cd ..'
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 config config --local status.showUntrackedFiles no
+
+# Load git completion
+zstyle ':completion:*:*:git:*' script ~/.zsh_scripts/git_completion.bash
+fpath=(~/.zsh_scripts $fpath)
+
+autoload -Uz compinit && compinit
+
