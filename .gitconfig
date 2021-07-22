@@ -13,6 +13,7 @@
   packedGitLimit = 256m
   packedGitWindowSize = 256m
   longpaths = true
+	autocrlf = input
 [alias]
   co = checkout
   cot = checkout --track
@@ -22,6 +23,7 @@
   st = status
   lg = log --branches --remotes --tags --oneline --decorate --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cd) %C(bold blue)<%an>%Creset' --abbrev-commit
   fa = fetch --all --prune
+  tagrecent = describe --tags --abbrev=0
 [push]
   default = tracking 
 [pull]
@@ -51,5 +53,7 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
-#[includeIf "gitdir:D:/Retrica/repos/"]
-#  path = D:/Retrica/repos/.gitconfig-retrica
+[url "ssh://git@github.com/"]
+  insteadOf = https://github.com/
+[includeIf "gitdir:~/Retrica/repo/"]
+  path = ~/Retrica/repo/.gitconfig-retrica

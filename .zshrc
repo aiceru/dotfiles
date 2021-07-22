@@ -98,7 +98,14 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-eval `dircolors ~/.dircolors`
+case "$OSTYPE" in
+  darwin*)
+    eval `gdircolors ~/.dircolors`
+  ;;
+  linux*)
+    eval `dircolors ~/.dircolors`
+  ;;
+esac
 
 prompt_context() {
   if [[ "$USER" != "$DEFAULT_USER" || -n "$SSH_CLIENT" ]]; then
@@ -130,3 +137,11 @@ fpath=(~/.zsh_scripts $fpath)
 
 autoload -Uz compinit && compinit
 
+# Turn off all beeps
+unsetopt BEEP
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/wooseok/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/wooseok/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/wooseok/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/wooseok/google-cloud-sdk/completion.zsh.inc'; fi

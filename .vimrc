@@ -25,7 +25,7 @@ Plugin 'ctrlp.vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'godlygeek/tabular'
 Plugin 'elzr/vim-json'
-Plugin 'Valloric/YouCompleteMe'
+"Plugin 'Valloric/YouCompleteMe'
 Plugin 'vim-scripts/Conque-GDB'
 Plugin 'rdnetto/YCM-Generator'
 
@@ -97,6 +97,8 @@ set fencs=utf-8,euc-kr,cp949
 set fileencoding=utf-8
 set encoding=utf-8
 set ffs=unix
+set visualbell
+set noerrorbells
 hi CursorLine cterm=NONE ctermbg=237 guibg=#303030
 hi OverLength cterm=NONE ctermbg=237 guibg=#303030
 match OverLength /\%121v.\+/
