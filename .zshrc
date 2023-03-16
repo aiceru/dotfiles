@@ -118,8 +118,8 @@ export LC_ALL=ko_KR.UTF-8
 
 # for GoLang
 export GOPATH=$HOME/go
-export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
 export GOBIN=$GOPATH/bin
+export PATH=$PATH:/usr/local/go/bin:$GOBIN
 
 # for global CC & CXX
 export CC=gcc
@@ -130,6 +130,8 @@ alias fj='find . -name "*.java" -print | xargs grep $1 -H -n'
 
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 config config --local status.showUntrackedFiles no
+
+alias openCollage='open $(xcrun simctl get_app_container booted co.retrica.collage data)'
 
 # Load git completion
 zstyle ':completion:*:*:git:*' script ~/.zsh_scripts/git_completion.bash
@@ -145,3 +147,20 @@ if [ -f '/Users/wooseok/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/wooseok
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/wooseok/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/wooseok/google-cloud-sdk/completion.zsh.inc'; fi
+
+# cbt alias
+alias cbt-alpha='cbt -project retrica-7d8d0 -instance retrica-dev-alpha'
+alias cbt-prod='cbt -project retrica-server -instance retrica-prod'
+
+# kubectl autocompletion
+source <(kubectl completion zsh)
+
+# flutter
+export PATH=$PATH:$HOME/flutter/bin
+
+# dart protoc plugin
+export PATH=$PATH:$HOME/protobuf.dart/protoc_plugin/bin
+
+# Android platform-tools
+export PATH=$PATH:$HOME/Library/Android/sdk/platform-tools
+[[ /usr/local/bin/kubectl ]] && source <(kubectl completion zsh)

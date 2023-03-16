@@ -1,6 +1,6 @@
 [user]
 	name = aiceru
-  email = aiceru@gmail.com
+	email = aiceru@gmail.com
 [core]
   editor = /usr/bin/vim
   repositoryformatversion = 0
@@ -24,10 +24,10 @@
   lg = log --branches --remotes --tags --oneline --decorate --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cd) %C(bold blue)<%an>%Creset' --abbrev-commit
   fa = fetch --all --prune
   tagrecent = describe --tags --abbrev=0
+	gone = ! git fetch -p && git for-each-ref --format '%(refname:short) %(upstream:track)' | awk '$2 == \"[gone]\" {print $1}' | xargs -r git branch -D
 [push]
   default = tracking 
 [pull]
-  rebase = true
 [http]
   postBuffer = 524288000
 [pack]
@@ -53,7 +53,7 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
-[url "ssh://git@github.com/"]
-  insteadOf = https://github.com/
-[includeIf "gitdir:~/Retrica/repo/"]
-  path = ~/Retrica/repo/.gitconfig-retrica
+;[url "ssh://git@github.com/"]
+;  insteadOf = https://github.com/
+;[includeIf "gitdir:~/Retrica/repo/"]
+;  path = ~/Retrica/repo/.gitconfig-retrica
