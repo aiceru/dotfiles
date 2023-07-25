@@ -142,12 +142,6 @@ autoload -Uz compinit && compinit
 # Turn off all beeps
 unsetopt BEEP
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/wooseok/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/wooseok/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/wooseok/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/wooseok/google-cloud-sdk/completion.zsh.inc'; fi
-
 # cbt alias
 alias cbt-alpha='cbt -project retrica-7d8d0 -instance retrica-dev-alpha'
 alias cbt-prod='cbt -project retrica-server -instance retrica-prod'
@@ -164,3 +158,9 @@ export PATH=$PATH:$HOME/protobuf.dart/protoc_plugin/bin
 # Android platform-tools
 export PATH=$PATH:$HOME/Library/Android/sdk/platform-tools
 [[ /usr/local/bin/kubectl ]] && source <(kubectl completion zsh)
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/aiceru/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/aiceru/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/aiceru/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/aiceru/google-cloud-sdk/completion.zsh.inc'; fi
